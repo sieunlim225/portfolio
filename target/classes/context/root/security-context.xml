@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<sec:http pattern="/favicon.ico" security="none" />
+    <!-- href mimeType error 방지 -->
+    <sec:http pattern="/resources/**" security="none" />
+    <sec:http pattern="/**.png" security="none" />
+    <sec:http pattern="/**.jpg" security="none" />
+    <sec:http pattern="/**.gif" security="none" />
+
+    <sec:http pattern="/**" auto-config="true" authentication-manager-ref="secLoginManager">
+		<sec:intercept-url pattern="/login" access="permitAll" />
+		<sec:intercept-url pattern="/join" access="permitAll" />
+		<sec:intercept-url pattern="/**" access="permitAll" />
+
+        <sec:access-denied-handler error-page="/denied"/>
+        <sec:form-login username-parameter="userId" password-parameter="password" 
+            login-page="/login" 
+            login-processing-url="/login" 
+            default-target-url="/"
+        />
+            <!-- authentication-failure-handler-ref="secLoginFailureHandler" -->
+            <!-- authentication-success-handler-ref="secLoginSuccessHandler" -->
+        <sec:logout logout-success-url="/" logout-url="/logout" invalidate-session="true" />
+          
+    </sec:http>
+    <!-- 사용자 로그인 처리 프로바이더 --> 
+    <sec:authentication-manager id="secLoginManager">
+        <sec:authentication-provider ref="secAuthProvider"/>
+    </sec:authentication-manager>
+        
+    <bean id="secAuthProvider" class="com.portfolio.project.security.SecAuthProvider" />
+    <bean id="secLoginSuccessHandler" class="com.portfolio.project.security.SecLoginSuccessHandler"  />
+    <bean id="secLoginFailureHandler" class="com.portfolio.project.security.SecLoginFailureHandler"  />
+     
+    <!-- bcrypt -->
+    <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+</beans>

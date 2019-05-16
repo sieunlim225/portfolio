@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 설정 로거 debug="true" 설정변경시 자동 스캔 scan="true" -->
+<configuration scan="true">
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	  <!-- encoders are assigned the type
+	       ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+	  <encoder>
+	  	<pattern>%d{HH:mm:ss} [%-5level] %logger{36} - %msg%n</pattern>
+	    <!-- <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern> -->
+	  </encoder>
+	</appender>
+
+	<!-- Application Loggers -->
+	<logger name="com.idealcreation.portfolio">
+		<level value="DEBUG" />
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="warn" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="warn" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="warn" />
+	</logger>
+	
+	<logger name="org.springframework.web">
+		<level value="warn" />
+	</logger>
+
+	<root level="WARN">
+	  <appender-ref ref="STDOUT" />
+	</root>
+</configuration>
