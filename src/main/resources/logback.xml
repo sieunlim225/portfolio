@@ -12,28 +12,40 @@
 	</appender>
 
 	<!-- Application Loggers -->
-	<logger name="com.idealcreation.portfolio">
+	<logger name="com.portfolio.project">
 		<level value="DEBUG" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
-		<level value="warn" />
+		<level value="DEBUG" />
 	</logger>
 	
 	<logger name="org.springframework.beans">
-		<level value="warn" />
+		<level value="WARN" />
 	</logger>
 	
 	<logger name="org.springframework.context">
-		<level value="warn" />
+		<level value="DEBUG" />
 	</logger>
 	
 	<logger name="org.springframework.web">
-		<level value="warn" />
+		<level value="DEBUG" />
+	</logger>
+	
+	<logger name="org.springframework.jndi">
+		<level value="WARN" />
+	</logger>
+	
+	<logger name="org.springframework.security">
+		<level value="WARN" />
+	</logger>
+	
+	<logger name="org.springframework.ui">
+		<level value="WARN" />
 	</logger>
 
-	<root level="WARN">
+	<root level="DEBUG">
 	  <appender-ref ref="STDOUT" />
 	</root>
 </configuration>

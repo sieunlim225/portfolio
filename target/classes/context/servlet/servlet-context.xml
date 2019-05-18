@@ -7,7 +7,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -15,8 +15,7 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<!-- <resources mapping="/resources/**" location="/resources/" /> -->
-	<default-servlet-handler/>
+	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -27,25 +26,5 @@
 	<context:component-scan base-package="com.portfolio.project" />
 	
 	<aop:aspectj-autoproxy/>
-	<aop:config>
-	<aop:aspect id="myAspect" ref="aBean">
-
-        <aop:pointcut id="businessService"
-            expression="within(com.portfolio.project.mvc.*)"/>
-		<aop:before pointcut-ref="businessService" method="testing"/>
-        <!-- <aop:before pointcut-ref="businessService" method="monitor"/> -->
-
-    </aop:aspect>
-    </aop:config>
-    <beans:bean id="aBean" class="com.portfolio.project.logger.LoggingAspect"/>
- <!--    <aop:before> : 메서드 실행 전에 advice실행
-
-<aop:after-returning> : 정상적으로 메서드 실행 후에 advice실행
-
-<aop:after-throwing> : 메서드 실행중 exception 발생 시 advice실행
-
-<aop:after> : 메서드 실행중 exception이 발생하여도 advice실행
-
-<aop:around> : 메서드 실행 전/후 밑 exception 발생시 advice 실행 -->
 	
 </beans:beans>
